@@ -1,0 +1,1145 @@
+{
+  "name": "ai_assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {
+          "download": true
+        }
+      },
+      "id": "de810e7a-ae36-4656-8ec8-03ca4df5ceca",
+      "name": "Получение документа",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        4848,
+        5872
+      ],
+      "webhookId": "5d0b9e87-c22c-44d3-8e37-0305c08cb1a6",
+      "credentials": {
+        "telegramApi": {
+          "id": "lweLhSF9OE0LbYsq",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "allowedFormats",
+              "value": "pdf,docx,txt,md,jpg,jpeg,png",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "dcd6bced-0b7e-47f8-b845-4499c0beeafa",
+      "name": "Настройка форматов",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5072,
+        5872
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.document.file_name.split('.').pop().toLowerCase() }}",
+                    "rightValue": "docx",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "f10d1317-9927-4561-a252-1fb9fd5d7a5c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "DOCX"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.document.file_name.split('.').pop().toLowerCase() }}",
+                    "rightValue": "pdf",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "f27001be-7595-42e6-a54c-7fdf1d74ae76"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PDF"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.document.file_name.split('.').pop().toLowerCase() }}",
+                    "rightValue": "txt",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "c824f79b-898e-4fd3-8b0f-3a486f517196"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "TXT"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.document.file_name.split('.').pop().toLowerCase() }}",
+                    "rightValue": "md",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "43839fde-3b45-45b6-97ec-96fcf5307139"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "MD"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.document.file_name.split('.').pop().toLowerCase() }}",
+                    "rightValue": "jpg",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "id-1"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "JPG"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.document.file_name.split('.').pop().toLowerCase() }}",
+                    "rightValue": "jpeg",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "id-2"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "JPEG"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.document.file_name.split('.').pop().toLowerCase() }}",
+                    "rightValue": "png",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "id-3"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PNG"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "064b346f-88d2-48f9-83d1-369119ae4e7d",
+      "name": "Роутинг форматов",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        5296,
+        5792
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.ocr.space/parse/image",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "K89762306088957"
+            },
+            {
+              "name": "base64Image",
+              "value": "={{ 'data:' + $('Получение документа').item.json.message.document.mime_type + ';base64,' + $json.data }}"
+            },
+            {
+              "name": "language",
+              "value": "rus"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "82b0ef40-f296-4df6-860b-79d507e17bad",
+      "name": "Считывание данных с изображения",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        5744,
+        5088
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        5520,
+        5088
+      ],
+      "id": "2fb49be8-2061-4228-9787-e11d9a165c23",
+      "name": "Получение base64 данных изображения"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "text",
+              "value": "={{ $json.ParsedResults[0].ParsedText }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "a75612f4-8a53-4803-a523-3c802f654f8b",
+      "name": "Извлечение текста",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5968,
+        5088
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a document summarization assistant. Your task is to read the provided document text and create a concise, informative summary that captures the key points and main ideas. Keep the summary clear and between 3-7 sentences. Summary must be in language of provided document."
+        }
+      },
+      "id": "fa22039f-1378-47b0-bc5e-8dc5c927c4cd",
+      "name": "Суммаризация",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        6192,
+        5424
+      ]
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        6208,
+        5648
+      ],
+      "id": "42427eff-a5d9-4a5e-812b-c8b3423b2141",
+      "name": "Модель для суммаризации",
+      "credentials": {
+        "groqApi": {
+          "id": "b4sq7XjeUIBEFqmS",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://v2.convertapi.com/convert/docx/to/txt",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "Secret",
+              "value": "pzRAes9t91pWmKBMGcjxcnceoziiN9NO"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "File",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "00f70340-5f0e-402e-bd94-99d0c654d9ed",
+      "name": "Преобразование DOCX в TXT",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        5744,
+        5376
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "id": "fde31e57-82a4-4bfe-8d38-dff0e46a5bf6",
+      "name": "Извлечение текста из PDF",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        5968,
+        5872
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "destinationKey": "text",
+        "options": {}
+      },
+      "id": "13bc4821-156c-473e-87fe-338f6f5203fd",
+      "name": "Извлечение текста из TXT",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        5968,
+        6368
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "destinationKey": "text",
+        "options": {}
+      },
+      "id": "3849031f-0b03-4402-b292-e2f25c1f1866",
+      "name": "Извлечение текста из MD",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        5968,
+        6656
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ws.detectlanguage.com/v3/detect",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        6256,
+        6224
+      ],
+      "id": "3adc32fb-0cd1-462f-a190-ad068adf3cc1",
+      "name": "Определение языка файла",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "fbHisHz6cCANKQUi",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-20b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        6208,
+        6048
+      ],
+      "id": "c6737b05-9ae8-4263-8ecf-f66e8aa0f94b",
+      "name": "Модель для определения ключевых слов",
+      "credentials": {
+        "groqApi": {
+          "id": "b4sq7XjeUIBEFqmS",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"summary\": {\n\t\t\t\"type\": \"string\"\n\t\t}\n\t}\n}"
+      },
+      "id": "caf4c8e2-26e1-44ab-87b2-374aadc26366",
+      "name": "Парсер суммаризации",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        6336,
+        5648
+      ]
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"keywords\": {\n\t\t\t\"type\": \"string\"\n\t\t}\n\t}\n}"
+      },
+      "id": "ff1cf13d-b861-4161-872d-54a735dca783",
+      "name": "Парсер ключевых слов",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        6336,
+        6048
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "numberInputs": 3,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        6544,
+        5904
+      ],
+      "id": "88a83e35-1d78-4612-a3eb-b59d7220f8a7",
+      "name": "Объединение результатов"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8cb5915a-3f29-4c69-94ac-143397f6332b",
+              "name": "id",
+              "value": "={{ $('Получение документа').item.json.message.message_id }}",
+              "type": "string"
+            },
+            {
+              "id": "id-1",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "uploader",
+              "value": "={{ $('Получение документа').item.json.message.from.username }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "file_name",
+              "value": "={{ $('Получение документа').item.json.message.document.file_name }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "summary",
+              "value": "={{ $('Объединение результатов').item.json.output.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "keywords",
+              "value": "={{ $('Объединение результатов').item.json.output.keywords }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "file_size",
+              "value": "={{ $('Получение документа').item.json.message.document.file_size }}",
+              "type": "number"
+            },
+            {
+              "id": "id-7",
+              "name": "file_format",
+              "value": "={{ $('Получение документа').item.json.message.document.file_name.split('.').pop().toLowerCase() }}",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "file_language",
+              "value": "={{ $json.language }}",
+              "type": "string"
+            },
+            {
+              "id": "dc716007-8e09-4ba6-b89f-18dd7fff6c4c",
+              "name": "file_language_confidence",
+              "value": "={{ $json.score }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "679cd847-1caf-4e93-8b0f-ec1965d23ff1",
+      "name": "Подготовка данных для таблицы",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6768,
+        5920
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1wj8nhwbvjh6qGpOAN78QPsvebeDMGK_nxZQVNhKY4Ik/",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "result",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "uploader",
+              "displayName": "uploader",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "file_name",
+              "displayName": "file_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "keywords",
+              "displayName": "keywords",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "file_size",
+              "displayName": "file_size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "file_format",
+              "displayName": "file_format",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "file_language",
+              "displayName": "file_language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "519b841e-37e2-4633-be64-9c631195f632",
+      "name": "Добавление в таблицу",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        6992,
+        5920
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "3IwYk9HiuMCrSNYp",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "1181037683",
+        "text": "Данные успешно внесены в таблицу",
+        "additionalFields": {}
+      },
+      "id": "3ef21583-1b21-4077-95e6-aacd20503b5b",
+      "name": "Уведомление об успешном добавлении записи в таблицу",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        7216,
+        5920
+      ],
+      "webhookId": "da9fdaa8-db49-4491-8856-9e554e38794a",
+      "credentials": {
+        "telegramApi": {
+          "id": "lweLhSF9OE0LbYsq",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "text",
+              "value": "={{ $binary.data.toString('utf-8') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "c47d374e-cd8b-4b4a-8392-172873e78c89",
+      "name": "Извлечение текста документа",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5968,
+        5376
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a keyword extraction assistant. Your task is to analyze the provided document text and extract the most important keywords and key phrases. Return 5-10 relevant keywords that best represent the document content. Keywords should be in language of provided document.\n['disable_tool_validation'] = True"
+        }
+      },
+      "id": "34bf94b3-467d-464c-af2f-5a8d7e84bfc1",
+      "name": "Определение ключевых слов",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        6192,
+        5824
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Получение документа": {
+      "main": [
+        [
+          {
+            "node": "Настройка форматов",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Настройка форматов": {
+      "main": [
+        [
+          {
+            "node": "Роутинг форматов",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Роутинг форматов": {
+      "main": [
+        [
+          {
+            "node": "Преобразование DOCX в TXT",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Извлечение текста из PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Извлечение текста из TXT",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Извлечение текста из MD",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Получение base64 данных изображения",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Получение base64 данных изображения",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Получение base64 данных изображения",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Считывание данных с изображения": {
+      "main": [
+        [
+          {
+            "node": "Извлечение текста",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Получение base64 данных изображения": {
+      "main": [
+        [
+          {
+            "node": "Считывание данных с изображения",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Извлечение текста": {
+      "main": [
+        [
+          {
+            "node": "Определение языка файла",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Суммаризация",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Определение ключевых слов",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Суммаризация": {
+      "main": [
+        [
+          {
+            "node": "Объединение результатов",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Модель для суммаризации": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Суммаризация",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Преобразование DOCX в TXT": {
+      "main": [
+        [
+          {
+            "node": "Извлечение текста документа",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Извлечение текста из PDF": {
+      "main": [
+        [
+          {
+            "node": "Определение языка файла",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Суммаризация",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Определение ключевых слов",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Извлечение текста из TXT": {
+      "main": [
+        [
+          {
+            "node": "Определение языка файла",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Суммаризация",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Определение ключевых слов",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Извлечение текста из MD": {
+      "main": [
+        [
+          {
+            "node": "Определение языка файла",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Суммаризация",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Определение ключевых слов",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Определение языка файла": {
+      "main": [
+        [
+          {
+            "node": "Объединение результатов",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Модель для определения ключевых слов": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Определение ключевых слов",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Парсер суммаризации": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Суммаризация",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Парсер ключевых слов": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Определение ключевых слов",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Объединение результатов": {
+      "main": [
+        [
+          {
+            "node": "Подготовка данных для таблицы",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Подготовка данных для таблицы": {
+      "main": [
+        [
+          {
+            "node": "Добавление в таблицу",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Добавление в таблицу": {
+      "main": [
+        [
+          {
+            "node": "Уведомление об успешном добавлении записи в таблицу",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Извлечение текста документа": {
+      "main": [
+        [
+          {
+            "node": "Определение языка файла",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Суммаризация",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Определение ключевых слов",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Определение ключевых слов": {
+      "main": [
+        [
+          {
+            "node": "Объединение результатов",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e86d87ef-8898-4273-a2a7-e5280ce397c3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "11ed2cd2db79e392176e8ab07635a431f03309f1c10c2d748d2fc3afdb1ecd44"
+  },
+  "id": "BFyG7v4D9DygfDGV",
+  "tags": []
+}
