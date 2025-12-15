@@ -1,5 +1,5 @@
 # ИИ-помогатор для баз знаний (Тестовое задание).
-Ссылка на бота - https://t.me/ai_knowledge_assistant_bot
+Ссылка на бота - https://t.me/ai_knowledge_assistant_bot (ID - 8099389705)
 
 Ссылка на таблицу - https://docs.google.com/spreadsheets/d/1wj8nhwbvjh6qGpOAN78QPsvebeDMGK_nxZQVNhKY4Ik
 
